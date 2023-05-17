@@ -1,6 +1,22 @@
 .home {
     .home__container {
         padding-top: 70px;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr .3fr;
+
+        .home__lists {
+            // min-width: 300px;
+            display: flex;
+            // justify-content: center;
+            gap: 60px;
+            // flex-wrap: wrap;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            padding: 60px;
+        }
+
+        .home__createl {
+            background-color: rgb(208, 216, 220);
+        }
     }
 }

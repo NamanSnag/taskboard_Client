@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(244, 242, 242);
+    background-color: rgba(207, 206, 206, 0.396);
+    backdrop-filter: blur(4px);
     position: fixed;
     z-index: 2;
     width: 100vw;
@@ -15,6 +16,7 @@
         .nav__head {
             text-decoration: none;
             color: rgb(9, 3, 92);
+            text-transform: capitalize;
         }
     }
 

@@ -6,7 +6,7 @@ import { base_URL } from '../../utils/url';
 
 import "./style.scss";
 
-const Login = () => {
+const Login = ({setUser}) => {
   const [authData, setAuthData] = useState({
     email : '',
     password : '',
@@ -19,7 +19,6 @@ const Login = () => {
       ...authData,
       [input.name] : input.value
     })
-    console.log(input.value)
   }
 
   // hitting register api
@@ -28,8 +27,9 @@ const Login = () => {
     const URL = base_URL+'/user/login'
     axios.post(URL, authData)
     .then(function (response) {
-      console.log(response);
-      
+      setUser(response.data.details);
+      localStorage.setItem('token', response.data.token); 
+      navigate('/home')
     })
     .catch(function (error) {
       console.log(error);

@@ -1,0 +1,21 @@
+.list {
+    background-color: rgb(238, 237, 236);
+    border: 2px solid rgb(185, 182, 182);
+    min-width: 310px;
+    .list__head {
+        border-bottom: 2px solid rgb(219, 213, 213);
+
+        p {
+            text-align: center;
+            margin: 5px;
+        }
+    }
+
+    .list__body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px 2px;
+        height: 450px;
+    }
+}

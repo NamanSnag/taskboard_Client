@@ -1,0 +1,14 @@
+.task {
+    background-color: rgb(255, 255, 255);
+    margin: 0px 4px;
+    padding: 4px;
+
+    .task__list {
+        display: flex;
+        gap: 4px;
+
+        .list__title {
+            text-transform: capitalize;
+        }
+    }
+}
