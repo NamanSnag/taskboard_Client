@@ -1,18 +1,29 @@
 import React from 'react'
 
 import './style.scss'
+import { Draggable } from 'react-beautiful-dnd'
 
-const Task = ({task}) => {
+const Task = ({task, index}) => {
   console.log(task)
+
   return (
-    <div className='task'>
+    <Draggable draggableId={task._id} index={index}>
+    {(provided) => (
+      <div
+        className='task'
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef} 
+      >
         <div className='task__list'>
-        <input type='checkbox' />
+          <input type='checkbox' />
           <div className='list__title'>
             {task.title}
           </div>
         </div>
-    </div>
+      </div>
+    )}
+  </Draggable>
   )
 }
 

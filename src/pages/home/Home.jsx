@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 
 import "./style.scss";
 import { List } from "../../components";
@@ -40,8 +41,13 @@ const Home = () => {
     createList(title);
   };
 
+  const handleDragEnd = () => {
+    
+  }
+
   return (
-    <div className="home">
+    <DragDropContext onDragEnd={handleDragEnd}>
+   <div className="home">
       <div className="home__container">
         <div className="home__lists">
           {list.map((list) => (
@@ -59,6 +65,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </DragDropContext>
   );
 };
 
