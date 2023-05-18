@@ -6,21 +6,37 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { base_URL } from "../../utils/url";
 import axios from "axios";
 
-const Task = ({ task, index, list, setList}) => {
+const Task = ({ task, index, list, setList }) => {
   const [checked, setChecked] = useState(task.completed);
-  
+
   const handleCheck = async (e) => {
     e.preventDefault();
     const newChecked = !checked;
     setChecked(newChecked);
-    
+
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(`${base_URL}/task/update/${task._id}`, {
         token,
         title: task.title,
         completed: newChecked,
-        listId: task.listId
+        listId: task.listId,
+      });
+      let order = res.data.details;
+      let index = list.findIndex((item) => item._id === task.listId);
+      list[index].taskOrder = order;
+      setList([...list]);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  const handleDeleteTask = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(`${base_URL}/task/delete/${task._id}`, {
+        token,
       });
       let order = res.data.details;
       let index = list.findIndex((item) => item._id === task.listId);
@@ -41,16 +57,26 @@ const Task = ({ task, index, list, setList}) => {
           ref={provided.innerRef}
         >
           <div className="task__list">
-          {
-            task.completed ? (
-              <input type="checkbox" checked={task.completed} onChange={handleCheck} />
-            ):(
-              <input type="checkbox" checked={task.completed} onChange={handleCheck}/>
-            )
-          }
+            {task.completed ? (
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={handleCheck}
+              />
+            ) : (
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={handleCheck}
+              />
+            )}
             <div className="list__title">{task.title}</div>
           </div>
-          {task.completed && <div className="task__delete"><BsFillTrashFill className="task__del"/></div>}
+          {task.completed && (
+            <div className="task__delete" onClick={handleDeleteTask}>
+              <BsFillTrashFill className="task__del" />
+            </div>
+          )}
         </div>
       )}
     </Draggable>
