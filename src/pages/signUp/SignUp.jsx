@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { base_URL } from '../../utils/url';
 
 import "./style.scss";
 
@@ -25,11 +26,11 @@ const SignUp = () => {
   // hitting register api
   const handleSignUp = (e) => {
     e.preventDefault();
-    const URL = 'http://localhost:8000/register'
+    const URL = `${base_URL}/user/register`
     axios.post(URL, authData)
     .then(function (response) {
       console.log(response);
-      
+      navigate('/login')
     })
     .catch(function (error) {
       console.log(error);

@@ -72,12 +72,13 @@ const Home = () => {
     // Get the source and destination lists
     const sourceList = list[sourceListIndex];
     const destinationList = list[destinationListIndex];
-
+  
     const sourceOrder = sourceList.taskOrder;
     const destinationOrder = destinationList.taskOrder;
   
     // Move the task from the source list to the destination list
     const taskToMove = sourceList.taskOrder.splice(source.index, 1)[0];
+    taskToMove.listId = destinationListId; // Update the listId of the moved task
     destinationList.taskOrder.splice(destination.index, 0, taskToMove);
   
     // Update the list state with the modified lists
@@ -91,12 +92,12 @@ const Home = () => {
         sourceListId,
         destinationListId,
         sourceOrder,
-        destinationOrder
+        destinationOrder,
       });
     } catch (error) {
       console.error("Error updating task order:", error);
     }
-  };  
+  };
   
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

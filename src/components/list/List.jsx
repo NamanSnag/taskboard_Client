@@ -4,7 +4,6 @@ import axios from "axios";
 import { base_URL } from "../../utils/url";
 import { Droppable } from "react-beautiful-dnd";
 import { RxCross1 } from "react-icons/rx";
-import { BsFillTrashFill } from "react-icons/bs";
 
 import "./style.scss";
 
@@ -41,17 +40,6 @@ const List = ({ list, setList, li }) => {
     setList(li);
   };
 
-  const handleDeleteCheckedTask = () => {
-    setList((prevList) => {
-      const newList = [...prevList];
-      const listIndex = newList.findIndex((li) => li._id === list._id);
-      const updatedTaskOrder = newList[listIndex].taskOrder.filter(
-        (task) => !task.checked
-      );
-      newList[listIndex].taskOrder = updatedTaskOrder;
-      return newList;
-    });
-  };
 
   return (
     <div className="list">
@@ -66,7 +54,7 @@ const List = ({ list, setList, li }) => {
             className="list__body"
           >
             {list.taskOrder.map((task, index) => (
-              <Task key={task._id} index={index} task={task} />
+              <Task key={task._id} list={li} setList={setList} index={index} task={task} />
             ))}
             {provided.placeholder}
           </div>
@@ -81,11 +69,6 @@ const List = ({ list, setList, li }) => {
           <input type="text" ref={taskt} placeholder="Enter task" />
           <button>ADD Task</button>
         </form>
-      </div>
-
-      <div className="list__checkedD" onClick={handleDeleteCheckedTask}>
-        <p>Delete all checked task of list</p>
-        <BsFillTrashFill className="trash"/>
       </div>
     </div>
   );

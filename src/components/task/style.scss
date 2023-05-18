@@ -2,6 +2,8 @@
     background-color: rgb(255, 255, 255);
     margin: 0px 4px;
     padding: 4px;
+    display: flex;
+    justify-content: space-between;
 
     .task__list {
         display: flex;
@@ -9,6 +11,20 @@
 
         .list__title {
             text-transform: capitalize;
+        }
+    }
+
+    .task__delete {
+        display: none;
+    }
+
+    &:hover {
+        .task__delete {
+            display: block;
+
+            .task__del {
+                color: red;
+            }
         }
     }
 }
