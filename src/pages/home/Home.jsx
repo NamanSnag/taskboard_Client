@@ -81,6 +81,8 @@ const Home = () => {
     taskToMove.listId = destinationListId; // Update the listId of the moved task
     destinationList.taskOrder.splice(destination.index, 0, taskToMove);
   
+    const taskId = taskToMove._id;
+
     // Update the list state with the modified lists
     setList([...list]);
   
@@ -93,6 +95,7 @@ const Home = () => {
         destinationListId,
         sourceOrder,
         destinationOrder,
+        taskId
       });
     } catch (error) {
       console.error("Error updating task order:", error);
